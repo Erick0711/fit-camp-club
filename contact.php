@@ -1,3 +1,25 @@
+<?php include "./administrador/config/conexionBD.php"; ?>
+
+<?php
+$objConec = new conexionBD();
+$resultado=$objConec->consultar("SELECT * FROM `contacto`");
+?>
+
+<?php
+if($_POST){
+  $fullname = $_POST['fullname'];
+  $email = $_POST['email'];
+  $message = $_POST['message'];
+
+  $conec = new conexionBD();
+  $sql = "INSERT INTO `contacto` (`id`, `fullname`, `email`, `message`) VALUES (NULL, '$fullname', '$email', '$message')"; 
+
+  $conec->ejecutar($sql);
+
+  header("location:./contact.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,14 +39,14 @@
 
 
 
-  <title>Title page</title>  
+  <title>Contacto</title>  
 
 <link href="./main.82cfd66e.css" rel="stylesheet"></head>
 
 <body>
 
  <!-- Add your content of header -->
-<header class="">
+ <header class="">
   <div class="navbar navbar-default visible-xs">
     <button type="button" class="navbar-toggle collapsed">
       <span class="sr-only">Toggle navigation</span>
@@ -32,7 +54,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a href="./index.html" class="navbar-brand">Mashup Template</a>
+    <a href="./index.html" class="navbar-brand">FitCamp Template</a>
   </div>
 
   <nav class="sidebar">
@@ -40,17 +62,16 @@
       <div class="site-header hidden-xs">
           <a class="site-brand" href="./index.html" title="">
             <img class="img-responsive site-logo" alt="" src="./assets/images/mashup-logo.svg">
-            Mashup Template
+            FitCamp Club
           </a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor.</p>
+        <p>Hoy es buen dia para ponerse una meta, ¿Cúal es la tuya?</p>
       </div>
       <ul class="nav">
-        <li><a href="./index.html" title="">Home</a></li>
-        <li><a href="./about.html" title="">About</a></li>
-        <li><a href="./services.html" title="">Services</a></li>
-        <li><a href="./contact.html" title="">Contact</a></li>
-        <li><a href="./components.html" title="">Components</a></li>
+        <li><a href="./index.html" title="">Inicio</a></li>
+        <li><a href="./about.html" title="">Cuéntame</a></li>
+        <li><a href="./services.html" title="">Servicios</a></li>
+        <li><a href="./contact.php" title="">Contacto</a></li>
+        <li><a href="./components.html" title="">Componetes</a></li>
 
       </ul>
 
@@ -82,11 +103,11 @@
     </div>
     <div class="section-container-spacer">
 
-    <form action="./emails.php" method="POST" class="reveal-content">
+    <form action="contact.php" method="POST" class="reveal-content">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email o Teléfono">
               </div>
               <div class="form-group">
                 <input type="text" class="form-control"  name="fullname" id="subject" placeholder="Nombre Completo" required>
@@ -114,7 +135,7 @@
                   <span class="fa-icon">
                     <i class="fa fa fa-map-marker" aria-hidden="true"></i>
                   </span>
-                  Z/ Los lotes - B/ Pedro Diez - C/Hernandos Siles
+                  Z/ Los lotes  B/ Pedro Diez  C/Hernandos Siles
                 </li>
               </ul>
               <h3>Sigueme en mis redes sociales</h3>
@@ -134,6 +155,27 @@
     </div>
   </div>
 </div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NOMBRE</th>
+      <th>CORREO</th>
+      <th>Mensaje</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($resultado as $contacto){?>
+    <tr>
+      <td><?php echo $contacto['id'] ?></td>
+      <td><?php echo $contacto['fullname'] ?></td>
+      <td><?php echo $contacto['email'] ?></td>
+      <td><?php echo $contacto['message'] ?></td>
+    </tr>
+    <?php } ?>
+  </tbody>
+</table>
 
 
 </main>
