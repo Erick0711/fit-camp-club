@@ -1,24 +1,5 @@
-<?php include "./administrador/config/conexionBD.php"; ?>
+<?php include("./administrador/config/conexionBD.php"); ?>
 
-<?php
-$objConec = new conexionBD();
-$resultado=$objConec->consultar("SELECT * FROM `contacto`");
-?>
-
-<?php
-if($_POST){
-  $fullname = $_POST['fullname'];
-  $email = $_POST['email'];
-  $message = $_POST['message'];
-
-  $conec = new conexionBD();
-  $sql = "INSERT INTO `contacto` (`id`, `fullname`, `email`, `message`) VALUES (NULL, '$fullname', '$email', '$message')"; 
-
-  $conec->ejecutar($sql);
-
-  header("location:./contact.php");
-}
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +17,7 @@ if($_POST){
   
   <link href="./assets/apple-icon-180x180.png" rel="apple-touch-icon">
   <link href="./assets/favicon.ico" rel="icon">
-
+  <link rel="stylesheet" href="./css/style.css">
 
 
   <title>Contacto</title>  
@@ -46,15 +27,41 @@ if($_POST){
 <body>
 
  <!-- Add your content of header -->
- <header class="">
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
+  <meta content="Page description" name="description">
+  <meta name="google" content="notranslate" />
+  <meta content="Mashup templates have been developped by Orson.io team" name="author">
+
+  <!-- Disable tap highlight on IE -->
+  <meta name="msapplication-tap-highlight" content="no">
+  
+  <link href="./assets/apple-icon-180x180.png" rel="apple-touch-icon">
+  <link href="./assets/favicon.ico" rel="icon">
+
+
+
+  <title>FitCamp-Club</title>  
+
+<link href="./main.82cfd66e.css" rel="stylesheet"></head>
+
+<body>
+
+<!-- Add your content of header -->
+<header class="">
   <div class="navbar navbar-default visible-xs">
     <button type="button" class="navbar-toggle collapsed">
-      <span class="sr-only">Toggle navigation</span>
+      <span class="sr-only"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a href="./index.html" class="navbar-brand">FitCamp Template</a>
+    <a href="./index.html" class="navbar-brand">FitCamp Club</a>
   </div>
 
   <nav class="sidebar">
@@ -62,36 +69,26 @@ if($_POST){
       <div class="site-header hidden-xs">
           <a class="site-brand" href="./index.html" title="">
             <img class="img-responsive site-logo" alt="" src="./assets/images/mashup-logo.svg">
-            FitCamp Club
+            FitCamp Club Activa
           </a>
-        <p>Hoy es buen dia para ponerse una meta, ¿Cúal es la tuya?</p>
+        <p>Todo lo que inviertas en nutrición, Te ahorrarás en medicina.</p>
       </div>
       <ul class="nav">
-        <li><a href="./index.html" title="">Inicio</a></li>
-        <li><a href="./about.html" title="">Cuéntame</a></li>
-        <li><a href="./services.html" title="">Servicios</a></li>
+        <li><a href="./index.php" title="">Inicio</a></li>
+        <li><a href="./about.php" title="">Cuéntame</a></li>
+        <li><a href="./services.php" title="">Servicios</a></li>
         <li><a href="./contact.php" title="">Contacto</a></li>
-        <li><a href="./components.html" title="">Componetes</a></li>
+        <li><a href="./components.php" title="">Componetes</a></li>
 
       </ul>
 
-      <nav class="nav-footer">
-        <p class="nav-footer-social-buttons">
-          <a class="fa-icon" href="https://www.instagram.com/" title="">
-            <i class="fa fa-instagram"></i>
-          </a>
-          <a class="fa-icon" href="https://dribbble.com/" title="">
-            <i class="fa fa-dribbble"></i>
-          </a>
-          <a class="fa-icon" href="https://twitter.com/" title="">
-            <i class="fa fa-twitter"></i>
-          </a>
-        </p>
-        <p>© Untitled | Website created with <a href="http://www.mashup-template.com/" title="Create website with free html template">Mashup Template</a>/<a href="https://www.unsplash.com/" title="Beautiful Free Images">Unsplash</a></p>
-      </nav>  
+      <!-- template/footer.php include  -->
+        <?php include("./template/footer.php"); ?>
+        
     </div> 
   </nav>
 </header>
+ 
 <main class="" id="main-collapse">
 
 
@@ -99,11 +96,11 @@ if($_POST){
   <div class="col-xs-12">
     <div class="section-container-spacer">
       <h1>Contactame</h1>
-      <p>Completa los datos correspondientes, sí no cuentas con correo electrónico(email) no es necesario puedes colocar tu número telefónico o puedes contactarme al número que se encuentra a la derecha y con gusto te atendere...</p>
+      <p>Completa los datos correspondientes, sí no cuentas con correo electrónico(email) no es necesario puedes colocar tu número telefónico o puedes contactarme al número que se encuentra a la derecha y con gusto te atenderé.</p>
     </div>
     <div class="section-container-spacer">
 
-    <form action="contact.php" method="POST" class="reveal-content">
+    <form action="./contact.php" method="POST" class="reveal-content">
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -113,7 +110,7 @@ if($_POST){
                 <input type="text" class="form-control"  name="fullname" id="subject" placeholder="Nombre Completo" required>
               </div>
               <div class="form-group">
-                <textarea class="form-control" rows="3" name="message" placeholder="Insert el mensaje" required></textarea>
+                <textarea class="form-control" rows="3" name="message" placeholder="Inserte el mensaje" required></textarea>
               </div>
               <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
             </div>
@@ -123,30 +120,30 @@ if($_POST){
                   <span class="fa-icon">
                     <i class="fa fa-phone" aria-hidden="true"></i>
                   </span>
-                  +591 635-688-88
+                  <a href="https://walink.co/1303d9" class="link-social" target="_blank">+591 677-228-46</a>
                 </li>
                 <li>
                   <span class="fa-icon">
                     <i class="fa fa-at" aria-hidden="true"></i>
                   </span>
-                  maicolarteaga0711@gmail.com
+                  <a href="mailto:fitcampclubactiva@gmail.com" class="link-social" target="_blank">fitcampclubactiva@gmail.com</a>
                 </li>
                 <li>
                   <span class="fa-icon">
                     <i class="fa fa fa-map-marker" aria-hidden="true"></i>
                   </span>
-                  Z/ Los lotes  B/ Pedro Diez  C/Hernandos Siles
+                  <a href="https://goo.gl/maps/GnwDKqTBhFyXtWnL9" target="_blank" class="link-social">Ubicación</a>
                 </li>
               </ul>
-              <h3>Sigueme en mis redes sociales</h3>
-              <a href="https://www.linkedin.com/" title="" class="fa-icon">
-                <i class="fa fa-linkedin"></i>
+              <h3>Encuentrame en mis redes</h3>
+              <a href="#" title="" class="fa-icon" target="_blank">
+                <i class="fa fa-facebook"></i>
               </a>
-              <a href="https://twitter.com/" title="" class="fa-icon">
-                <i class="fa fa-twitter"></i>
+              <a href="https://walink.co/1303d9" title="" class="fa-icon" target="_blank">
+                <i class="fa fa-whatsapp"></i>
               </a>
-              <a href="https://dribbble.com/" title="" class="fa-icon">
-                <i class="fa fa-dribbble"></i>
+              <a href="mailto:fitcampclubactiva@gmail.com" title="" class="fa-icon" target="_blank">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
               </a>
             </div>
           </div>
@@ -155,27 +152,9 @@ if($_POST){
     </div>
   </div>
 </div>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>NOMBRE</th>
-      <th>CORREO</th>
-      <th>Mensaje</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php foreach($resultado as $contacto){?>
-    <tr>
-      <td><?php echo $contacto['id'] ?></td>
-      <td><?php echo $contacto['fullname'] ?></td>
-      <td><?php echo $contacto['email'] ?></td>
-      <td><?php echo $contacto['message'] ?></td>
-    </tr>
-    <?php } ?>
-  </tbody>
-</table>
+<div class="content-ubicacion">
+<iframe src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d3797.361773035755!2d-63.17219358181327!3d-17.868529546289267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e2!4m3!3m2!1d-17.8683187!2d-63.1712588!4m5!1s0x93f1eb3f81b18b7d%3A0x67b71e3a76dd8351!2sfit%20camp%20club%20activa!3m2!1d-17.8683068!2d-63.1712522!5e0!3m2!1ses!2sbo!4v1655753962097!5m2!1ses!2sbo" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="ubicacion"></iframe>
+  </div>
 
 
 </main>
